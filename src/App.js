@@ -3,7 +3,7 @@ import { getUser } from './services/fetch-utils';
 import {
   BrowserRouter as Router,
   Switch,
-  NavLink,
+  Link,
   Route,
   Redirect,
 } from 'react-router-dom';
@@ -17,12 +17,23 @@ import { logout } from './services/fetch-utils';
 
 export default function App() {
   // You'll need to track the user in state
+  const [user, setUser] = useState('');
 
   // add a useEffect to get the user and inject the user object into state on load
+  useEffect(() => {
+    async function fetch() {
+      const currentUser = await getUser();
+
+      setUser(currentUser);
+    }
+    fetch();
+  }, []);
 
   async function handleLogout() {
     // call the logout function
+    await logout();
     // clear the user in state
+    setUser('');
   }
 
   return (
@@ -30,6 +41,15 @@ export default function App() {
       <div className='App'>
         <header>
           {/* if there is a user in state, render out a link to the board games list, the create page, and add a button to let the user logout */}
+          {
+            user && <Link to='/board-games'>Board Games</Link>
+          }
+          {
+            user && <Link to='/create'>Create Page</Link>
+          }
+          {
+            user && <button onClick={() => handleLogout()}>Log Out</button>
+          }
         </header>
         <main>
           <Switch>
