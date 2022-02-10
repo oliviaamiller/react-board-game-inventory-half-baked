@@ -27,7 +27,7 @@ export default function App() {
       setUser(currentUser);
     }
     fetch();
-  }, []);
+  });
 
   async function handleLogout() {
     // call the logout function

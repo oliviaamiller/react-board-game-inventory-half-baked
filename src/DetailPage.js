@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { getGameById } from './services/fetch-utils';
+import './App.css';
 
 export default function DetailPage() {
   const [game, setGame] = useState({});
@@ -14,7 +15,7 @@ export default function DetailPage() {
       setGame(thisGame);
     }
     fetch();
-  }, []);
+  });
 
   return (
     <div className='detail'>

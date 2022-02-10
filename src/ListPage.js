@@ -14,7 +14,7 @@ export default function ListPage() {
       setGames(allGames);
     }
     fetch();
-  }, []);
+  });
 
   return (
     <div className='list games'>
